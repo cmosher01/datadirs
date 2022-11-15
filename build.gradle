@@ -1,0 +1,26 @@
+plugins {
+    id 'application'
+}
+
+this.version = '0.0.1'
+
+this.group = 'nu.mine.mosher.io'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of 17
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation group: 'dev.dirs', name: 'directories', version: 'latest.release'
+    implementation group: 'commons-io', name: 'commons-io', version: 'latest.release'
+}
+
+application {
+    mainClass = 'nu.mine.mosher.io.DataDirs'
+}
