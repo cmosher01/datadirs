@@ -1,0 +1,50 @@
+---
+on:
+  push:
+    branches:
+      - "*"
+
+jobs:
+  "exercise":
+    strategy:
+      matrix:
+        os:
+          - "ubuntu-latest"
+          - "windows-latest"
+          - "macos-latest"
+
+    runs-on: "${{ matrix.os }}"
+
+    steps:
+      - uses: "actions/checkout@v3"
+
+      - uses: "actions/setup-java@v3"
+        with:
+          java-version: "17"
+          distribution: "temurin"
+          settings-path: "${{ github.workspace }}"
+
+      - uses: "gradle/gradle-build-action@v2"
+        with:
+          arguments: "run"
+
+      - uses: "gradle/gradle-build-action@v2"
+        env:
+          "XDG_CACHE_HOME": "/srv/mycache"
+        with:
+          arguments: "run"
+
+      - uses: "gradle/gradle-build-action@v2"
+        env:
+          "XDG_CONFIG_HOME": "$HOME/.config"
+          "HOME": "/srv/myhome"
+        with:
+          arguments: "run"
+
+      - uses: "gradle/gradle-build-action@v2"
+        env:
+          "XDG_CONFIG_HOME": "$HOME/.config"
+          "XDG_CACHE_HOME": "/srv/mycache"
+          "HOME": "/srv/myhome"
+        with:
+          arguments: "run"
