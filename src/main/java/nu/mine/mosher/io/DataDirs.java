@@ -11,8 +11,8 @@ public class DataDirs {
     public static void main(final String... args) {
         out.println("PROJECT");
         final var proj = ProjectDirectories.from("nu.mine.mosher", "<org>", "<app>");
-        print(proj.configDir, "config");
         print(proj.preferenceDir, "prefs");
+        print(proj.configDir, "config");
         print(proj.dataDir, "data");
         print(proj.dataLocalDir, "local data");
         print(proj.cacheDir, "cache");
@@ -21,8 +21,8 @@ public class DataDirs {
 
         out.println("BASE");
         final var base = BaseDirectories.get();
-        print(base.configDir, "config");
         print(base.preferenceDir, "prefs");
+        print(base.configDir, "config");
         print(base.dataDir, "data");
         print(base.dataLocalDir, "local data");
         print(base.cacheDir, "cache");

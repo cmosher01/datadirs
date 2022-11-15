@@ -57,3 +57,9 @@ jobs:
           "HOME": "/srv/myhome"
         with:
           arguments: "run"
+
+      - uses: "gradle/gradle-build-action@v2"
+        env:
+          "APPDATA": "Z:\\Users\\me\\AppData"
+        with:
+          arguments: "run"
