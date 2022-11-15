@@ -15,8 +15,17 @@ jobs:
 
     runs-on: "${{ matrix.os }}"
 
+    defaults:
+      run:
+        shell: "bash"
+
     steps:
       - uses: "actions/checkout@v3"
+
+      - run: |
+          cd
+          echo "homedir=$(pwd)" >> $GITHUB_ENV
+          cd -
 
       - uses: "actions/setup-java@v3"
         with:
@@ -36,14 +45,14 @@ jobs:
 
       - uses: "gradle/gradle-build-action@v2"
         env:
-          "XDG_CONFIG_HOME": "$HOME/.config"
+          "XDG_CONFIG_HOME": "${{ env.homedir }}/.config"
           "HOME": "/srv/myhome"
         with:
           arguments: "run"
 
       - uses: "gradle/gradle-build-action@v2"
         env:
-          "XDG_CONFIG_HOME": "$HOME/.config"
+          "XDG_CONFIG_HOME": "${{ env.homedir }}/.config"
           "XDG_CACHE_HOME": "/srv/mycache"
           "HOME": "/srv/myhome"
         with:
